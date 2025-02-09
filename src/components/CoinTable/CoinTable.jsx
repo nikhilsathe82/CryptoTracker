@@ -38,7 +38,7 @@ function CoinTable() {
 
   return (
   <>
-   {currency}
+   
     {/* Cointable <button onClick={() => setPage(page+1)}> Click </button> {page} */}
     <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
        <div className="w-full bg-yellow-300 text-black flex py-4 px-2 font-semibold align-items-center justify-center">

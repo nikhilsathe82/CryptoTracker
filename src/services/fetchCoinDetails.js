@@ -1,7 +1,7 @@
 import axiosInstance from "../helper/axiosinstance";
 
-export async function fetchCoinData(id) {
-  const perPage = 10;
+export async function fetchCoinDetails(id) {
+  
   try {
     const response = await axiosInstance.get(`/coins/${id}`);
     return response.data;
