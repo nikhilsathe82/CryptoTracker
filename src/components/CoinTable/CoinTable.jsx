@@ -5,12 +5,13 @@ import { fetchCoinData } from "../../services/fetchCoinData";
 import { useQuery } from "react-query";
 // import { currencyContext } from "../../context/CurrencyContext";
 import currencyStore from "../../state/store.js";
+import { useNavigate } from "react-router-dom";
 
 function CoinTable() {
    const {currency} = currencyStore();
 
   // const {currency} = useContext(currencyContext);
-
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   //use query we can pass three parametsrs, coin is query name, page is state variable and fetchCoinData is function which will be called when page value changes.
   //we can store the return data in many variables
@@ -20,15 +21,10 @@ function CoinTable() {
        cacheTime: 1000 * 60 * 2,
        staleTime: 1000 * 60 * 2, //indicates for how long we will consider data fresh. then do not make api call.
   });
-
-  // useEffect(() => {
-  //   console.log("component cointable Mount");
-  //   console.log(data);  
-  // }, [data]);
-
-  // if(isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  
+  function handleCoinRedirect(Id){
+      navigate (`/details/${Id}`);
+  }
 
   if(isError) {
     return <div>Error: {error.message}</div>;
@@ -65,7 +61,8 @@ function CoinTable() {
           {isLoading && <div>Loading...</div>}
           {data && data.map((coin) => { 
             return (
-                <div key={coin.id} className="w-full bg-transparent text-black flex py-4 px-2 font-semibold align-items-center justify-between">
+                <div onClick={() => handleCoinRedirect(coin.id)} key={coin.id} className="w-full bg-transparent text-black
+                 flex py-4 px-2 font-semibold align-items-center justify-between cursor-pointer">
                     <div className="flex items-center justify-start gap-3 basis-[35%]">
 
                         <div className="w-[5rem] h-[5rem]"> 
